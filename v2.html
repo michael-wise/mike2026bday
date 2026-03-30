@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The National Sports Dispatch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f1eb;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .newspaper {
+            background: #faf8f4;
+            width: 1100px;
+            max-width: 100%;
+            padding: 40px 50px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            border: 1px solid #d4c9b8;
+        }
+
+        /* === MASTHEAD === */
+        .masthead {
+            text-align: center;
+            border-bottom: 3px double #2f2f2f;
+            padding-bottom: 12px;
+            margin-bottom: 6px;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            color: #555;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-weight: 900;
+            font-size: 52px;
+            letter-spacing: -1px;
+            color: #1a1a1a;
+            line-height: 1;
+            text-transform: none;
+        }
+
+        .masthead-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            color: #666;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* === DATE BAR === */
+        .date-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 8.5px;
+            color: #555;
+            padding: 6px 0;
+            border-bottom: 1px solid #2f2f2f;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* === SECTION LABELS === */
+        .section-label {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        /* === MAIN HEADLINE AREA === */
+        .main-headline-area {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 18px;
+        }
+
+        .main-headline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 42px;
+            line-height: 1.08;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .main-subheadline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .main-content-area {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+
+        .main-article-text {
+            font-family: 'Source Serif 4', serif;
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: #2a2a2a;
+            column-count: 2;
+            column-gap: 24px;
+            column-rule: 1px solid #ddd;
+        }
+
+        .main-article-text .byline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #666;
+            margin-bottom: 10px;
+            column-span: all;
+        }
+
+        .main-article-text .dateline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 12px;
+            column-span: all;
+        }
+
+        .lead-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lead-image .image-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #e8e2d8 0%, #d4cec4 100%);
+            border: 1px solid #c8c0b4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lead-image .image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.03) 2px,
+                    rgba(0,0,0,0.03) 3px
+                );
+        }
+
+        .lead-image .image-placeholder .initials {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: rgba(0,0,0,0.12);
+            letter-spacing: 8px;
+            z-index: 1;
+        }
+
+        .image-caption {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9.5px;
+            color: #666;
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
+        }
+
+        .image-credit {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 8px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* === THREE COLUMN SECTION === */
+        .three-col-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            border-top: 2px solid #2f2f2f;
+            padding-top: 16px;
+            margin-bottom: 18px;
+        }
+
+        .col-article {
+            padding: 0 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .col-article:first-child {
+            padding-left: 0;
+        }
+
+        .col-article:last-child {
+            padding-right: 0;
+            border-right: none;
+        }
+
+        .col-headline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.15;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .col-summary {
+            font-family: 'Source Serif 4', serif;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #3a3a3a;
+        }
+
+        .col-byline {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .col-tag {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* === BOTTOM BANNER === */
+        .bottom-banner {
+            border-top: 2px solid #2f2f2f;
+            padding-top: 14px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .bottom-article {
+            padding-right: 20px;
+        }
+
+        .bottom-article:last-child {
+            padding-right: 0;
+            padding-left: 20px;
+            border-left: 1px solid #ddd;
+        }
+
+        .bottom-headline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 17px;
+            line-height: 1.2;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+
+        .bottom-summary {
+            font-family: 'Source Serif 4', serif;
+            font-size: 12.5px;
+            line-height: 1.55;
+            color: #444;
+        }
+
+        /* === WHAT'S NEWS SIDEBAR === */
+        .whats-news {
+            border: 1px solid #bbb;
+            padding: 14px 16px;
+            background: #fdfcf9;
+        }
+
+        .whats-news h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #2f2f2f;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .whats-news ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .whats-news li {
+            font-family: 'Source Serif 4', serif;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #3a3a3a;
+            padding: 6px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .whats-news li:last-child {
+            border-bottom: none;
+        }
+
+        .whats-news li strong {
+            font-weight: 700;
+        }
+
+        /* === MARKET DATA === */
+        .market-data {
+            border-top: 1px solid #2f2f2f;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 18px;
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            color: #555;
+        }
+
+        .market-item {
+            text-align: center;
+        }
+
+        .market-item .label {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            font-size: 8px;
+        }
+
+        .market-item .value {
+            font-size: 11px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .market-item .change {
+            font-size: 9px;
+        }
+
+        .change.up { color: #2d7a2d; }
+        .change.down { color: #b33; }
+
+        /* === MIDDLE ROW === */
+        .middle-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 18px;
+            margin-bottom: 18px;
+        }
+
+        /* === PRINT STYLES === */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .newspaper {
+                box-shadow: none;
+                border: none;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .newspaper {
+                padding: 20px;
+            }
+            .main-headline {
+                font-size: 28px;
+            }
+            .masthead h1 {
+                font-size: 36px;
+            }
+            .main-content-area {
+                grid-template-columns: 1fr;
+            }
+            .three-col-section {
+                grid-template-columns: 1fr;
+            }
+            .col-article {
+                padding: 12px 0 !important;
+                border-right: none !important;
+                border-bottom: 1px solid #ddd;
+            }
+            .col-article:last-child {
+                border-bottom: none;
+            }
+            .bottom-banner {
+                grid-template-columns: 1fr;
+            }
+            .bottom-article:last-child {
+                padding-left: 0;
+                border-left: none;
+            }
+            .middle-row {
+                grid-template-columns: 1fr;
+            }
+            .main-article-text {
+                column-count: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+
+        <!-- MASTHEAD -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>VOL. XLIV NO. 91</span>
+                <span>* * * *</span>
+                <span>NHL | MLB | NBA | NFL</span>
+            </div>
+            <h1>The National Sports Dispatch.</h1>
+            <div class="masthead-subtitle">America's Authority on Athletics &middot; Founded 1924</div>
+        </header>
+
+        <!-- DATE BAR -->
+        <div class="date-bar">
+            <span>Monday, March 30, 2026</span>
+            <span>HOCKEY | BASEBALL | BASKETBALL | FOOTBALL | COMMENTARY</span>
+            <span>$4.00</span>
+        </div>
+
+        <!-- SCORES TICKER -->
+        <div class="market-data">
+            <div class="market-item">
+                <div class="label">NHL</div>
+                <div class="value">Panthers 4</div>
+                <div class="change up">Bruins 2</div>
+            </div>
+            <div class="market-item">
+                <div class="label">NHL</div>
+                <div class="value">Rangers 3</div>
+                <div class="change down">Islanders 5</div>
+            </div>
+            <div class="market-item">
+                <div class="label">MLB Spring</div>
+                <div class="value">Yankees 7</div>
+                <div class="change up">Red Sox 3</div>
+            </div>
+            <div class="market-item">
+                <div class="label">NBA</div>
+                <div class="value">Heat 108</div>
+                <div class="change up">Celtics 101</div>
+            </div>
+            <div class="market-item">
+                <div class="label">NBA</div>
+                <div class="value">Knicks 114</div>
+                <div class="change up">Lakers 109</div>
+            </div>
+        </div>
+
+        <!-- MAIN HEADLINE -->
+        <div class="main-headline-area">
+            <div class="section-label">Breaking</div>
+            <h2 class="main-headline">NBC Sports Offers Lead Announcer Role to Florida Man Discovered Calling Game From His Seat</h2>
+            <p class="main-subheadline">Network president, seated two rows away at a Panthers game, heard
+                Mike Squillante's play-by-play and knew immediately: 'That's the guy'</p>
+
+            <div class="main-content-area">
+                <div class="main-article-text">
+                    <p class="byline">By Tommy Rinaldi and Sarah Kessler</p>
+                    <p class="dateline">March 30, 2026 6:15 a.m. ET</p>
+                    <p>
+                        SUNRISE, Fla. -- NBC Sports president Rick Cordella was two rows behind the glass
+                        at a Florida Panthers game in January when he heard something that stopped him
+                        mid-conversation. A man in the seats ahead was walking Jeff Bezos's teenage son
+                        through his first live hockey game -- explaining reads, calling out plays
+                        before they developed, breaking down strategy between whistles. Nearby fans
+                        were clearly listening.
+                    </p>
+                    <p>
+                        "I leaned over to my colleague and said, 'Who is that guy?'" Mr. Cordella recalled
+                        in an interview. "By the second period, I wasn't watching the game anymore. My eyes were on him."
+                    </p>
+                    <p>
+                        The man was Michael Squillante -- a Bronx-born, Florida-based sports devotee, ticket
+                        industry veteran, and former college hockey player who has never broadcast professionally but whose friends say
+                        has a natural instinct for reading a game that most paid analysts lack.
+                        By the end of the night, Mr. Cordella
+                        had introduced himself and exchanged numbers. By the following week, NBC had
+                        put him at the top of the shortlist to replace the legendary Bob Costas.
+                    </p>
+                    <p>
+                        "I've auditioned hundreds of broadcasters in conference rooms and sound booths,"
+                        Mr. Cordella said. "None of them sounded as natural as Mike did from a plastic
+                        seat at a hockey game. You can't coach that. You can't teach it. The man was
+                        born to do this."
+                    </p>
+                    <p>
+                        Mr. Squillante, who grew up in the Pelham Bay section of the Bronx and played
+                        college hockey before an ankle injury cut his playing days short, has been a
+                        fixture of Florida's sports scene for years, known equally for his encyclopedic
+                        knowledge across hockey, baseball, and basketball, and for always having the best
+                        seats in the building. Friends say none of them were surprised by the offer.
+                    </p>
+                    <p>
+                        Mr. Costas, for his part, gave his full endorsement. "I've been doing this
+                        a long time," he said. "Mike Squillante is the most natural I've ever heard.
+                        He has the instincts, the voice, and -- most importantly -- the love for the game.
+                        I couldn't be happier handing him the chair."
+                    </p>
+                </div>
+                <div class="lead-image">
+                    <div class="image-placeholder">
+                        <span class="initials">M S</span>
+                    </div>
+                    <div class="image-caption">
+                        Michael Squillante in his usual seat at Amerant Bank Arena, where an NBC executive
+                        first heard him calling a Panthers game to nearby fans.
+                    </div>
+                    <div class="image-credit">Photo: Getty Images</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE ROW -->
+        <div class="middle-row">
+            <div>
+                <div class="col-tag">Business of Sports</div>
+                <div class="col-headline" style="font-size: 22px; margin-bottom: 10px;">
+                    Squillante's Ticket Empire: How a Bronx Kid Built the Premier
+                    Pipeline to the Best Seats in the House
+                </div>
+                <div class="col-summary">
+                    <p style="margin-bottom: 8px;">
+                        <span class="col-byline">By Anthony DiNapoli</span>
+                    </p>
+                    <p>
+                        Long before the NBC announcement, Mike Squillante had already made his mark on
+                        the sports industry from the business side. His ticket operation -- spanning
+                        professional hockey, baseball, basketball, cruises, and major sporting events --
+                        has become one of the most respected in the business, known for delivering
+                        premium access that others simply can't match.
+                    </p>
+                    <p style="margin-top: 8px;">
+                        "If you want the best seats, you call Mike. That's just how it works," said
+                        one longtime client. "He doesn't deal in nosebleeds. The man has a gift for
+                        putting you so close to the ice you can hear the skates."
+                    </p>
+                </div>
+            </div>
+            <div class="whats-news">
+                <h3>What's News</h3>
+                <ul>
+                    <li>
+                        <strong>The Panthers</strong> extended their winning streak
+                        to seven games, further validating what Mike Squillante
+                        predicted in a now-viral preseason interview. <em>C1</em>
+                    </li>
+                    <li>
+                        <strong>Bob Costas</strong> called Squillante "the only person
+                        I'd trust with this microphone," in a rare personal
+                        endorsement during his farewell broadcast. <em>A2</em>
+                    </li>
+                    <li>
+                        <strong>MLB umpires</strong> have begun using an AI strike
+                        zone system that somehow calls fewer strikes than the
+                        human version, baffling everyone involved. <em>C4</em>
+                    </li>
+                    <li>
+                        <strong>A new poll</strong> found that 91% of sports fans
+                        believe their team's general manager "could be replaced
+                        by a golden retriever with no measurable decline
+                        in performance." <em>D2</em>
+                    </li>
+                    <li>
+                        <strong>Season ticket holders</strong> nationwide reported
+                        a 340% increase in unsolicited opinions from the
+                        stranger sitting next to them. <em>D6</em>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- THREE COLUMNS -->
+        <div class="three-col-section">
+            <div class="col-article">
+                <div class="col-tag">Profile</div>
+                <h3 class="col-headline">From Pelham Bay to Prime Time: The Italian-American Kid Who Never Forgot Where He Came From</h3>
+                <p class="col-byline">By Maria Calabrese</p>
+                <p class="col-summary">
+                    In the Pelham Bay section of the Bronx, everybody knows the Squillante name.
+                    Michael Squillante grew up in a neighborhood where Sunday dinner was sacred,
+                    loyalty was everything, and sports were a second religion. Friends and family
+                    describe a man who never let success change him -- the same person who'd
+                    give you the shirt off his back as a kid is the same one who'll drop
+                    everything today if his family needs him. "Mike is the guy who holds it all
+                    together," said one family member. "He always has been."
+                </p>
+            </div>
+            <div class="col-article">
+                <div class="col-tag">Analysis</div>
+                <h3 class="col-headline">Study: 100% of Dads Who Say 'I Could Have Gone Pro' Could Not Have Gone Pro</h3>
+                <p class="col-byline">By James Whitfield</p>
+                <p class="col-summary">
+                    A comprehensive study published this week in the Journal of Athletic Delusion
+                    has confirmed what children nationwide have long suspected: every father who
+                    claims he "could have gone pro if it weren't for the injury" is, statistically
+                    speaking, incorrect. Researchers noted one notable exception in their data set -- a
+                    Bronx-born hockey player whose college tape was described by evaluators as
+                    "genuinely impressive" -- but declined to name the individual, citing "an ongoing
+                    NBC contract."
+                </p>
+            </div>
+            <div class="col-article">
+                <div class="col-tag">Opinion</div>
+                <h3 class="col-headline">Mike Squillante Is the Voice This Era of Sports Deserves</h3>
+                <p class="col-byline">Editorial Board</p>
+                <p class="col-summary">
+                    In an age of algorithms, analytics, and broadcasts that feel like they were
+                    produced by a committee of consultants, Mike Squillante is a throwback to what
+                    sports broadcasting should be: personal, electric, and unscripted. He learned
+                    the craft not in a studio but on frozen rinks, in loud stadiums, and around
+                    kitchen tables in the Bronx where the postgame analysis was louder than the
+                    game itself. NBC didn't just hire an announcer. They hired the guy every fan
+                    wishes was sitting next to them.
+                </p>
+            </div>
+        </div>
+
+        <!-- BOTTOM BANNER -->
+        <div class="bottom-banner">
+            <div class="bottom-article">
+                <div class="col-tag">NFL Legacy</div>
+                <h3 class="bottom-headline">'He Was Like a Brother to Me': Wayne Huizenga's Family Reveals Dolphins Owner's Deep Bond With Squillante</h3>
+                <p class="bottom-summary">
+                    MIAMI -- In a rare interview, members of the late Wayne Huizenga's family have spoken
+                    publicly for the first time about the close friendship between the former Miami Dolphins
+                    owner and Mike Squillante. The two men, who met through Florida's sports and business
+                    circles, developed what associates describe as one of the most genuine friendships in
+                    professional sports. "Wayne didn't let many people in," said one family member. "But
+                    Mike was different. He was a confidant, a sounding board, and honestly, one of the few
+                    people who could make Wayne laugh until he cried. They sat together at every home game.
+                    Wayne always said Mike was the best judge of talent he'd ever met -- on the field and off."
+                </p>
+            </div>
+            <div class="bottom-article">
+                <div class="col-tag">Fan Culture</div>
+                <h3 class="bottom-headline">Florida's Season Ticket Aristocracy: Inside the Small World of Fans Who Always Have the Best Seats</h3>
+                <p class="bottom-summary">
+                    SUNRISE, Fla. -- There is a tier of sports fan that exists above the ordinary. They
+                    don't check StubHub. They don't sit in the upper deck. They simply have the best
+                    seats, every game, every season, and they've had them for years. At the center of
+                    Florida's version of this world sits Mike Squillante, whose seats at Panthers and
+                    Dolphins games have become the stuff of local legend. "You always know where Mike
+                    is sitting," said one arena regular. "Right there. Glass. Every single time. And
+                    he's having more fun than anyone in the building."
+                </p>
+            </div>
+        </div>
+
+        <!-- EXTRA ROW -->
+        <div class="three-col-section" style="margin-top: 18px;">
+            <div class="col-article">
+                <div class="col-tag">Family</div>
+                <h3 class="col-headline">The Squillante Way: How One Family Made Loyalty, Generosity, and a Good Meal the Foundation of Everything</h3>
+                <p class="col-byline">By Rachel Ferraro</p>
+                <p class="col-summary">
+                    Ask anyone in the Squillante orbit what makes Mike tick and the answer is always
+                    the same: family. Not in the abstract, motivational-poster sense -- in the
+                    "he will rearrange his entire schedule, drive four hours, and show up with a tray of
+                    baked ziti" sense. Whether it's coaching a grandkid, checking in on a cousin, or
+                    quietly handling something so nobody else has to worry, Squillante has built a
+                    reputation as the person everyone calls first. "He's not just part of the family,"
+                    said one relative. "He's the reason the family works."
+                </p>
+            </div>
+            <div class="col-article">
+                <div class="col-tag">Investigation</div>
+                <h3 class="col-headline">Area Man's DVR Now 94% Full of Games He 'Is Definitely Going to Watch'</h3>
+                <p class="col-byline">By Kevin Thornberry</p>
+                <p class="col-summary">
+                    BOCA RATON, Fla. -- Local retiree Gerald Mastriano, 68, has accumulated roughly
+                    1,400 hours of recorded sporting events on his DVR, a collection he insists he
+                    will "get to this weekend." The recordings date back to the 2024 NHL playoffs.
+                    Mr. Mastriano's wife, Linda, reports that he continues to record every game
+                    "just in case," despite knowing all the scores. "He treats that DVR like a
+                    wine cellar," she said. "He's aging the games. He thinks they get better with time."
+                </p>
+            </div>
+            <div class="col-article">
+                <div class="col-tag">Broadcasting</div>
+                <h3 class="col-headline">'YES! And the Crowd Goes Wild!': Colleagues Recall Squillante's Legendary Marv Albert Impression</h3>
+                <p class="col-byline">By Dan Shaughnessy</p>
+                <p class="col-summary">
+                    Long before Mike Squillante became a household name in his own right, he was
+                    famous in a smaller circle for a different reason: a Marv Albert impression so
+                    accurate it once fooled a switchboard operator at Madison Square Garden. "He'd
+                    do the 'YES!' and you'd swear Marv was in the room," said one longtime friend.
+                    "The inflection, the timing, the little pause before the call -- it was perfect."
+                    Colleagues say the impression wasn't just a party trick. It revealed a deep
+                    student of the craft who understood what made great broadcasting great.
+                </p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="border-top: 3px double #2f2f2f; margin-top: 20px; padding-top: 8px; text-align: center;">
+            <span style="font-family: 'Libre Baskerville', serif; font-size: 8px; color: #999; letter-spacing: 2px; text-transform: uppercase;">
+                Copyright 2026 National Sports Dispatch Media, Inc. All Rights Reserved.
+            </span>
+        </div>
+    </div>
+</body>
+</html>
